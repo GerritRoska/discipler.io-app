@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discipler - Complete Dark Mode Flow</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Dark Mode Palette */
+            --primary-blue: #4276F5;
+            --text-main: #F1F5FB;
+            --bg-dark: #181E25;
+            --surface-card: #232A33;
+            --accent-teal: #7DC9C2;
+            --highlight-coral: #FFBFAE;
+            --secondary-text: #A4B3C6;
+            --border-divider: #253040;
+            --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.3);
+            --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.4);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0A0E15;
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .device-frame {
+            width: 390px;
+            height: 844px;
+            background: var(--bg-dark);
+            border-radius: 40px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: var(--bg-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            font-size: 14px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-divider);
+        }
+        
+        .screen {
+            height: calc(100% - 44px);
+            overflow-y: auto;
+            position: relative;
+            display: none;
+            background: var(--bg-dark);
+        }
+        
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Smooth scrollbar for dark mode */
+        .screen::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .screen::-webkit-scrollbar-track {
+            background: var(--surface-card);
+        }
+        
+        .screen::-webkit-scrollbar-thumb {
+            background: var(--border-divider);
+            border-radius: 4px;
+        }
+        
+        /* Welcome Screen - Mission Focused */
+        .welcome-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 40px 40px;
+            height: 100%;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(66, 118, 245, 0.05) 100%);
+        }
+        
+        .welcome-top {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .discipler-logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-teal) 100%);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 10px 40px rgba(66, 118, 245, 0.3);
+            position: relative;
+        }
+        
+        .discipler-logo::before {
+            content: 'd';
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            position: absolute;
+        }
+        
+        .discipler-logo::after {
+            content: '+';
+            position: absolute;
+            font-size: 24px;
+            color: white;
+            top: 20px;
+            right: 25px;
+            font-weight: 300;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .welcome-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-main) 0%, var(--accent-teal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .welcome-mission {
+            font-size: 20px;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .welcome-subtitle {
+            font-size: 16px;
+            color: var(--secondary-text);
+            line-height: 1.6;
+            max-width: 280px;
+        }
+        
+        .welcome-benefits {
+            margin-top: 32px;
+            text-align: left;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+        
+        .benefit-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(125, 201, 194, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-teal);
+            flex-shrink: 0;
+        }
+        
+        .welcome-bottom {
+            width: 100%;
+        }
+        
+        .primary-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #5585F7 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 118, 245, 0.4);
+        }
+        
+        .secondary-button {
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            color: var(--secondary-text);
+            border: 2px solid var(--border-divider);
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 12px;
+        }
+        
+        .secondary-button:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+        
+        /* Quiz Screens */
+        .quiz-header {
+            position: sticky;
+            top: 0;
+            background: var(--bg-dark);
+            z-index: 10;
+            border-bottom: 1px solid var(--border-divider);
+        }
+        
+        .quiz-progress {
+            height: 4px;
+            background: var(--surface-card);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quiz-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-teal) 100%);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(125, 201, 194, 0.5);
+        }
+        
+        .quiz-content {
+            padding: 32px 24px 120px;
+        }
+        
+        .quiz-step {
+            font-size: 14px;
+            color: var(--accent-teal);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .quiz-question {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        
+        .quiz-encouragement {
+            font-size: 14px;
+            color: var(--secondary-text);
+            margin-bottom: 24px;
+            padding: 12px 16px;
+            background: rgba(125, 201, 194, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-teal);
+        }
+        
+        .quiz-verse {
+            font-size: 12px;
+            color: var(--accent-teal);
+            font-style: italic;
+            margin-top: 8px;
+        }
+        
+        /* Quiz Options */
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .quiz-option {
+            padding: 16px 20px;
+            background: var(--surface-card);
+            border: 2px solid var(--border-divider);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(66, 118, 245, 0.1);
+            transform: translateX(4px);
+        }
+        
+        .quiz-option.selected {
+            border-color: var(--primary-blue);
+            background: rgba(66, 118, 245, 0.15);
+            font-weight: 600;
+        }
+        
+        .quiz-option.selected::before {
+            content: "✓";
+            width: 20px;
+            height: 20px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        /* Slider Input */
+        .slider-container {
+            margin: 32px 0;
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        
+        .slider-label-start {
+            color: var(--highlight-coral);
+        }
+        
+        .slider-label-end {
+            color: var(--accent-teal);
+        }
+        
+        .slider {
+            width: 100%;
+            height: 6px;
+            background: var(--surface-card);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(66, 118, 245, 0.4);
+        }
+        
+        .slider-value {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-top: 16px;
+        }
+        
+        /* Habit Assessment Grid */
+        .habits-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .habit-item {
+            background: var(--surface-card);
+            border: 2px solid var(--border-divider);
+            border-radius: 12px;
+            padding: 16px;
+            transition: var(--transition);
+        }
+        
+        .habit-checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+        
+        .habit-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border-divider);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .habit-item.selected .habit-checkbox {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+        
+        .habit-item.selected .habit-checkbox::after {
+            content: "✓";
+            color: white;
+            font-weight: 700;
+        }
+        
+        .habit-label {
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .habit-frequency {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-divider);
+            display: none;
+        }
+        
+        .habit-item.selected .habit-frequency {
+            display: block;
+        }
+        
+        .frequency-label {
+            font-size: 14px;
+            color: var(--secondary-text);
+            margin-bottom: 8px;
+        }
+        
+        .frequency-select {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-divider);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 14px;
+        }
+        
+        /* Growth Focus Cards */
+        .growth-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .growth-card {
+            padding: 20px;
+            background: var(--surface-card);
+            border: 2px solid var(--border-divider);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+        }
+        
+        .growth-card:hover {
+            border-color: var(--primary-blue);
+            transform: scale(1.02);
+        }
+        
+        .growth-card.selected {
+            border-color: var(--primary-blue);
+            background: rgba(66, 118, 245, 0.15);
+        }
+        
+        .growth-card.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .growth-card.selected::after {
+            content: "✓";
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .growth-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .growth-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        
+        .selection-counter {
+            text-align: center;
+            margin-top: 16px;
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+        
+        /* Time Commitment */
+        .time-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        
+        .time-option {
+            padding: 20px;
+            background: var(--surface-card);
+            border: 2px solid var(--border-divider);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .time-option:hover {
+            border-color: var(--primary-blue);
+        }
+        
+        .time-option.selected {
+            border-color: var(--primary-blue);
+            background: rgba(66, 118, 245, 0.15);
+        }
+        
+        .time-duration {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .time-label {
+            font-size: 12px;
+            color: var(--secondary-text);
+            margin-top: 4px;
+        }
+        
+        /* Hope Text Area */
+        .hope-textarea {
+            width: 100%;
+            padding: 16px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-divider);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 120px;
+            transition: var(--transition);
+        }
+        
+        .hope-textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(66, 118, 245, 0.2);
+        }
+        
+        .char-counter {
+            text-align: right;
+            font-size: 12px;
+            color: var(--secondary-text);
+            margin-top: 8px;
+        }
+        
+        /* Congrats Screen */
+        .congrats-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .congrats-icon {
+            font-size: 72px;
+            margin-bottom: 24px;
+            animation: celebrate 0.5s ease;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .congrats-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .congrats-text {
+            font-size: 16px;
+            color: var(--secondary-text);
+            margin-bottom: 32px;
+        }
+        
+        /* Plan Preview */
+        .plan-preview-header {
+            padding: 32px 24px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(66, 118, 245, 0.1) 0%, transparent 100%);
+        }
+        
+        .plan-preview-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .plan-preview-subtitle {
+            color: var(--secondary-text);
+        }
+        
+        .plan-days {
+            padding: 0 24px 160px;
+        }
+        
+        .day-card {
+            margin-bottom: 16px;
+            background: var(--surface-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-divider);
+            transition: var(--transition);
+        }
+        
+        .day-card.expanded {
+            border-color: var(--primary-blue);
+        }
+        
+        .day-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .day-header:hover {
+            background: rgba(66, 118, 245, 0.05);
+        }
+        
+        .day-number {
+            font-weight: 600;
+            color: var(--accent-teal);
+        }
+        
+        .day-scripture {
+            color: var(--text-main);
+        }
+        
+        .day-expand-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .day-card.expanded .day-expand-icon {
+            transform: rotate(180deg);
+        }
+        
+        .day-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .day-card.expanded .day-content {
+            max-height: 500px;
+            padding: 0 20px 20px;
+        }
+        
+        .day-section {
+            margin-bottom: 16px;
+        }
+        
+        .day-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-teal);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .day-section-content {
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+        
+        /* Sign Up Screen */
+        .auth-container {
+            padding: 32px 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .auth-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .auth-subtitle {
+            color: var(--secondary-text);
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--secondary-text);
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-divider);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(66, 118, 245, 0.2);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary-blue);
+        }
+        
+        /* Invite Screen */
+        .invite-hero {
+            padding: 32px 24px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(125, 201, 194, 0.1) 0%, transparent 100%);
+        }
+        
+        .invite-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .invite-description {
+            color: var(--secondary-text);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .invite-verse {
+            font-style: italic;
+            color: var(--accent-teal);
+            font-size: 14px;
+        }
+        
+        .invite-form {
+            padding: 24px;
+        }
+        
+        .contact-entry {
+            background: var(--surface-card);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-divider);
+        }
+        
+        .add-contact-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 2px dashed var(--border-divider);
+            border-radius: 12px;
+            color: var(--secondary-text);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 16px;
+        }
+        
+        .add-contact-btn:hover {
+            border-color: var(--accent-teal);
+            color: var(--accent-teal);
+        }
+        
+        /* Today Screen */
+        .today-header {
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(66, 118, 245, 0.05) 0%, rgba(125, 201, 194, 0.05) 100%);
+            border-bottom: 1px solid var(--border-divider);
+        }
+        
+        .greeting {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .day-progress {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .progress-ring {
+            width: 48px;
+            height: 48px;
+            position: relative;
+        }
+        
+        .progress-ring svg {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-bg {
+            stroke: var(--surface-card);
+            stroke-width: 3;
+            fill: none;
+        }
+        
+        .progress-ring-fill {
+            stroke: var(--accent-teal);
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-dasharray: 132;
+            stroke-dashoffset: 88;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .streak-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--surface-card);
+            padding: 8px 12px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .streak-badge .fire {
+            font-size: 20px;
+            animation: flicker 2s infinite;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .content-card {
+            margin: 16px;
+            background: var(--surface-card);
+            border-radius: 16px;
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--border-divider);
+        }
+        
+        .content-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-blue);
+        }
+        
+        .card-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-divider);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        /* Tab Bar */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface-card);
+            border-top: 1px solid var(--border-divider);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            max-width: 390px;
+            margin: 0 auto;
+        }
+        
+        .tab-item {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .tab-item.active {
+            color: var(--primary-blue);
+        }
+        
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .tab-label {
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border-divider);
+            max-width: 390px;
+            margin: 0 auto;
+        }
+        
+        .nav-button {
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 16px;
+        }
+        
+        .nav-button.secondary {
+            background: var(--surface-card);
+            color: var(--text-main);
+        }
+        
+        .nav-button.primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #5585F7 100%);
+            color: white;
+            flex: 1;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(66, 118, 245, 0.3);
+        }
+        
+        /* Loading State */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 40px;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--surface-card);
+            border-top-color: var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            margin-top: 24px;
+            font-size: 16px;
+            color: var(--secondary-text);
+            text-align: center;
+        }
+        
+        .loading-messages {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--accent-teal);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>Discipler</span>
+            <span>100%</span>
+        </div>
+        
+        <!-- 1. Welcome Screen - Mission Focused -->
+        <div class="screen active" id="welcome">
+            <div class="welcome-container">
+                <div class="welcome-top">
+                    <div class="discipler-logo"></div>
+                    <h1 class="welcome-title">Welcome to Discipler!</h1>
+                    <p class="welcome-mission">Helping people grow in intimacy with Jesus</p>
+                    <p class="welcome-subtitle">We're excited to walk alongside you. This quick journey helps us understand you and craft a growth plan just for you with daily habits, encouragement, and community.</p>
+                    <div class="welcome-benefits">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <span>Personalized 7-day spiritual growth plan</span>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <span>Daily Scripture & prayer guidance</span>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <span>Accountability with friends</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="welcome-bottom">
+                    <button class="primary-button" onclick="goToScreen('quiz-1')">Let's Begin</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2. Quiz Step 1: Spiritual Journey -->
+        <div class="screen" id="quiz-1">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-fill" style="width: 12.5%"></div>
+                </div>
+            </div>
+            <div class="quiz-content">
+                <div class="quiz-step">Step 1 of 8</div>
+                <h2 class="quiz-question">Where are you on your spiritual journey?</h2>
+                <div class="quiz-encouragement">
+                    Every journey matters—God delights in new beginnings!
+                    <div class="quiz-verse">Psalm 32:8 (ESV)</div>
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)">Just starting out</div>
+                    <div class="quiz-option" onclick="selectOption(this)">1 year</div>
+                    <div class="quiz-option" onclick="selectOption(this)">2-5 years</div>
+                    <div class="quiz-option" onclick="selectOption(this)">5+ years</div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button primary" onclick="goToScreen('quiz-2')">Continue</button>
+            </div>
+        </div>
+        
+        <!-- 3. Quiz Step 2: Relationship Strength -->
+        <div class="screen" id="quiz-2">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-fill" style="width: 25%"></div>
+                </div>
+            </div>
+            <div class="quiz-content">
+                <div class="quiz-step">Step 2 of 8</div>
+                <h2 class="quiz-question">How would you describe your relationship with God right now?</h2>
+                <div class="quiz-encouragement">No matter where you are, He meets you there.</div>
+                <div class="slider-container">
+                    <div class="slider-labels">
+                        <span class="slider-label-start">😔 Struggling</span>
+                        <span class="slider-label-end">😊 Strong</span>
+                    </div>
+                    <input type="range" class="slider" min="0" max="100" value="50" oninput="updateSliderValue(this)">
+                    <div class="slider-value" id="slider-value">50</div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button secondary" onclick="goToScreen('quiz-1')">Back</button>
+                <button class="nav-button primary" onclick="goToScreen('quiz-3')">Continue</button>
+            </div>
+        </div>
+        
+        <!-- 4. Quiz Step 3: Biggest Obstacle -->
+        <div class="screen" id="quiz-3">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-fill" style="width: 37.5%"></div>
+                </div>
+            </div>
+            <div class="quiz-content">
+                <div class="quiz-step">Step 3 of 8</div>
+                <h2 class="quiz-question">What's your biggest obstacle to spiritual growth right now?</h2>
+                <div class="quiz-encouragement">You're not alone. Jesus walks with you through every struggle.</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)">Doubt or uncertainty</div>
+                    <div class="quiz-option" onclick="selectOption(this)">Busyness/distraction</div>
+                    <div class="quiz-option" onclick="selectOption(this)">Sin struggles</div>
+                    <div class="quiz-option" onclick="selectOption(this)">Lack of motivation</div>
+                    <div class="quiz-option" onclick="selectOption(this)">Don't know where to start</div>
+                    <div class="quiz-option" onclick="selectOption(this)">Other</div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button secondary" onclick="goToScreen('quiz-2')">Back</button>
+                <button class="nav-button primary" onclick="goToScreen('quiz-4')">Continue</button>
+            </div>
+        </div>
+        
+        <!-- 5. Quiz Step 4: Personalized Encouragement -->
+        <div class="screen" id="quiz-4">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-fill" style="width: 50%"></div>
+                </div>
+            </div>
+            <div class="quiz-content">
+                <div class="quiz-step">Step 4 of 8</div>
+                <h2 class="quiz-question">God sees you and loves you</h2>
+                <div style="padding: 24px; background: var(--surface-card); border-radius: 16px; margin: 24px 0;">
+                    <p style="font-size: 18px; line-height: 1.6; margin-bottom: 16px;">
+                        "Come to me, all who labor and are heavy laden, and I will give you rest."
+                    </p>
+                    <p style="font-size: 14px; color: var(--accent-teal);">— Matthew 11:28-30 (ESV)</p>
+                </div>
+                <p style="color: var(--secondary-text); line-height: 1.6;">
+                    Rest isn't earned, it's received. Your busyness doesn't define you—God's love does.
+                </p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button primary" onclick="goToScreen('quiz-5')">Continue</button>
+            </div>
+        </div>
+        
+        <!-- 6. Quiz Step 5: Current Habits Assessment -->
+        <div class="screen" id="quiz-5">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-fill" style="width: 62.5%"></div>
+                </div>
+            </div>
+            <div class="quiz-content">
+                <div class="quiz-step">Step 5 of 8</div>
+                <h2 class="quiz-question">Which of these habits are already part of your life?</h2>
+                <div class="quiz-encouragement">
+                    For each one you practice, let us know how often. Small beginnings, lasting impact!
+                </div>
+                <div class="habits-list">
+                    <div class="habit-item" onclick="toggleHabitItem(this)">
+                        <div class="habit-checkbox-row">
+                            <div class="habit-checkbox"></div>
+                            <div class="habit-label">Spend intentional time in prayer</div>
+                        </div>
+                        <div class="habit-frequency">
+                            <div class="frequency-label">How often?</div>
+                            <select class="frequency-select">
+                                <option>Never</option>
+                                <option>Occasionally</option>
+                                <option>Weekly</option>
+                                <option>Several times a week</option>
+                                <option>Daily</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="habit-item" onclick="toggleHabitItem(this)">
+                        <div class="habit-checkbox-row">
+                            <div class="habit-checkbox"></div>
+                            <div class="habit-label">Bible Reading</div>
+                        </div>
+                        <div class="habit-frequency">
+                            <div class="frequency-label">How often?</div>
+                            <select class="frequency-select">
+                                <option>Never</option>
+                                <option>Occasionally</option>
+                                <option>Weekly</option>
+                                <option>Several times a week</option>
+                                <option>Daily</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="habit-item" onclick="toggleHabitItem(this)">
+                        <div class="habit-checkbox-row">
+                            <div class="habit-checkbox"></div>
+                            <div class="habit-label">Set aside time for rest or Sabbath</div>
+                        </div>
+                        <div class="habit-frequency">
+                            <div class="frequency-label">How often?</div>
+                            <select class="frequency-select">
+                                <option>Never</option>
+                                <option>Occasionally</option>
+                                <option>Monthly</option>
+                                <option>Weekly</option>
+                                <option>Daily</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="habit-item" onclick="toggleHabitItem(this)">
+                        <div class="habit-checkbox-row">
+                            <div class="habit-checkbox"></div>
+                            <div class="habit-label">Connect with a Christian community</div>
+                        </div>
+                        <div class="habit-frequency">
+                            <div class="frequency-label">How often?</div>
+                            <select class="frequency-select">
+                                <option>Never</option>
+                                <option>Occasionally</option>
+                                <option>Monthly</option>
+                                <option>Weekly</option>
+                                <option>Daily</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="habit-item" onclick="toggleHabitItem(this)">
+                        <div class="habit-checkbox-row">
+                            <div class="habit-checkbox"></div>
+                            <div class="habit-label">Practice generosity or give to others</div>
+                        </div>
+                        <div class="habit-frequency">
+                            <div class="frequency-label">How often?</div>
+                            <select class="frequency-select">
+                                <option>Never</option>
+                                <option>Occasionally</option>
+                                <option>Monthly</option>
+                                <option>Weekly</option>
+                                <option>Daily</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="habit-item" onclick="toggleHabitItem(this)">
+                        <div class="habit-checkbox-row">
+                            <div class="habit-checkbox"></div>
+                            <div class="habit-label">Serve others or volunteer</div>
+                        </div>
+                        <div class="habit-frequency">
+                            <div class="frequency-label">How often?</div>
+                            <select class="frequency-select">
+                                <option>Never</option>
+                                <option>Occasionally</option>
+                                <option>Monthly</option>
+                                <option>Weekly</option>
+                                <option>Daily</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="habit-item" onclick="toggleHabitItem(this)">
+                        <div class="habit-checkbox-row">
+                            <div class="habit-checkbox"></div>
+                            <div class="habit-label">Share your faith with others</div>
+                        </div>
+                        <div class="habit-frequency">
+                            <div class="frequency-label">How often?</div>
+                            <select class="frequency-select">
+                                <option>Never</option>
+                                <option>Occasionally</option>
+                                <option>Monthly</option>
+                                <option>Weekly</option>
+                                <option>Daily</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="habit-item" onclick="toggleHabitItem(this)">
+                        <div class="habit-checkbox-row">
+                            <div class="habit-checkbox"></div>
+                            <div class="habit-label">Practice fasting</div>
+                        </div>
+                        <div class="habit-frequency">
+                            <div class="frequency-label">How often?</div>
+                            <select class="frequency-select">
+                                <option>Never</option>
+                                <option>Occasionally</option>
+                                <option>Monthly</option>
+                                <option>Weekly</option>
+                                <option>Daily</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="habit-item" onclick="toggleHabitItem(this)">
+                        <div class="habit-checkbox-row">
+                            <div class="habit-checkbox"></div>
+                            <div class="habit-label">Set aside quiet time to listen for God's voice</div>
+                        </div>
+                        <div class="habit-frequency">
+                            <div class="frequency-label">How often?</div>
+                            <select class="frequency-select">
+                                <option>Never</option>
+                                <option>Occasionally</option>
+                                <option>Weekly</option>
+                                <option>Several times a week</option>
+                                <option>Daily</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="habit-item" onclick="toggleNoneYet(this)">
+                        <div class="habit-checkbox-row">
+                            <div class="habit-checkbox"></div>
+                            <div class="habit-label">None yet, but I want to start!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button secondary" onclick="goToScreen('quiz-4')">Back</button>
+                <button class="nav-button primary" onclick="goToScreen('quiz-6')">Continue</button>
+            </div>
+        </div>
+        
+        <!-- 7. Quiz Step 6: Growth Focus (Pick up to 3) -->
+        <div class="screen" id="quiz-6">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-fill" style="width: 75%"></div>
+                </div>
+            </div>
+            <div class="quiz-content">
+                <div class="quiz-step">Step 6 of 8</div>
+                <h2 class="quiz-question">Which area do you MOST want to grow in over the next season?</h2>
+                <div class="quiz-encouragement">Pick up to 3. Desire is the start of transformation.</div>
+                <div class="growth-cards">
+                    <div class="growth-card" onclick="toggleGrowth(this)">
+                        <div class="growth-icon">🙏</div>
+                        <div class="growth-name">Deeper prayer</div>
+                    </div>
+                    <div class="growth-card" onclick="toggleGrowth(this)">
+                        <div class="growth-icon">📖</div>
+                        <div class="growth-name">Reading the Bible</div>
+                    </div>
+                    <div class="growth-card" onclick="toggleGrowth(this)">
+                        <div class="growth-icon">🌅</div>
+                        <div class="growth-name">Finding rest & Sabbath</div>
+                    </div>
+                    <div class="growth-card" onclick="toggleGrowth(this)">
+                        <div class="growth-icon">👥</div>
+                        <div class="growth-name">Building community</div>
+                    </div>
+                    <div class="growth-card" onclick="toggleGrowth(this)">
+                        <div class="growth-icon">💝</div>
+                        <div class="growth-name">Practicing generosity</div>
+                    </div>
+                    <div class="growth-card" onclick="toggleGrowth(this)">
+                        <div class="growth-icon">🤲</div>
+                        <div class="growth-name">Serving others</div>
+                    </div>
+                    <div class="growth-card" onclick="toggleGrowth(this)">
+                        <div class="growth-icon">📢</div>
+                        <div class="growth-name">Sharing my faith</div>
+                    </div>
+                    <div class="growth-card" onclick="toggleGrowth(this)">
+                        <div class="growth-icon">🍃</div>
+                        <div class="growth-name">Fasting</div>
+                    </div>
+                    <div class="growth-card" onclick="toggleGrowth(this)">
+                        <div class="growth-icon">🔇</div>
+                        <div class="growth-name">Hearing God's voice</div>
+                    </div>
+                </div>
+                <div class="selection-counter">0 of 3 selected</div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button secondary" onclick="goToScreen('quiz-5')">Back</button>
+                <button class="nav-button primary" onclick="goToScreen('quiz-7')">Continue</button>
+            </div>
+        </div>
+        
+        <!-- 8. Quiz Step 7: Time Commitment -->
+        <div class="screen" id="quiz-7">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-fill" style="width: 87.5%"></div>
+                </div>
+            </div>
+            <div class="quiz-content">
+                <div class="quiz-step">Step 7 of 8</div>
+                <h2 class="quiz-question">How much time do you want to invest daily?</h2>
+                <div class="time-options">
+                    <div class="time-option" onclick="selectTime(this)">
+                        <div class="time-duration">5</div>
+                        <div class="time-label">min</div>
+                    </div>
+                    <div class="time-option" onclick="selectTime(this)">
+                        <div class="time-duration">15</div>
+                        <div class="time-label">min</div>
+                    </div>
+                    <div class="time-option" onclick="selectTime(this)">
+                        <div class="time-duration">30+</div>
+                        <div class="time-label">min</div>
+                    </div>
+                </div>
+                <h2 class="quiz-question" style="margin-top: 32px;">When would you like to practice your new habits?</h2>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)">Morning</div>
+                    <div class="quiz-option" onclick="selectOption(this)">Afternoon</div>
+                    <div class="quiz-option" onclick="selectOption(this)">Evening</div>
+                    <div class="quiz-option" onclick="selectOption(this)">No preference</div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button secondary" onclick="goToScreen('quiz-6')">Back</button>
+                <button class="nav-button primary" onclick="goToScreen('quiz-8')">Continue</button>
+            </div>
+        </div>
+        
+        <!-- 9. Quiz Step 8: Hope -->
+        <div class="screen" id="quiz-8">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-fill" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="quiz-content">
+                <div class="quiz-step">Step 8 of 8</div>
+                <h2 class="quiz-question">What's your hope for your spiritual life in the next 3 months?</h2>
+                <div class="quiz-encouragement">
+                    God cares about the desires of our hearts
+                    <div class="quiz-verse">Psalm 37:4 (ESV)</div>
+                </div>
+                <textarea class="hope-textarea" placeholder="I want to hear God more...
+I want more peace...
+I want to lead my family better..." oninput="updateCharCount(this)"></textarea>
+                <div class="char-counter">0 / 280 characters</div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button secondary" onclick="goToScreen('quiz-7')">Back</button>
+                <button class="nav-button primary" onclick="goToScreen('loading')">Generate My Plan</button>
+            </div>
+        </div>
+        
+        <!-- 10. Loading Screen -->
+        <div class="screen" id="loading">
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Generating your personalized plan...</div>
+                <div class="loading-messages" id="loading-message">Analyzing your spiritual journey...</div>
+            </div>
+        </div>
+        
+        <!-- 11. Congrats Transition -->
+        <div class="screen" id="congrats">
+            <div class="congrats-container">
+                <div class="congrats-icon">🎉</div>
+                <h1 class="congrats-title">Congratulations!</h1>
+                <p class="congrats-text">Here's what we found for your spiritual growth journey...</p>
+                <button class="primary-button" onclick="goToScreen('plan-preview')">View Your Plan</button>
+            </div>
+        </div>
+        
+        <!-- 12. Plan Preview -->
+        <div class="screen" id="plan-preview">
+            <div class="plan-preview-header">
+                <h1 class="plan-preview-title">Here's Your Custom Plan</h1>
+                <p class="plan-preview-subtitle">Based on your answers, we recommend...</p>
+            </div>
+            <div class="plan-days">
+                <div class="day-card expanded">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div>
+                            <span class="day-number">Day 1</span>
+                            <span class="day-scripture">Psalm 23:1-3 (ESV)</span>
+                        </div>
+                        <span class="day-expand-icon">▼</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-section">
+                            <div class="day-section-title">Scripture</div>
+                            <div class="day-section-content">Read Psalm 23:1-3 in your Bible or app</div>
+                        </div>
+                        <div class="day-section">
+                            <div class="day-section-title">Reflect</div>
+                            <div class="day-section-content">
+                                • Where do I need to let God set my pace?<br>
+                                • What does "green pastures" mean for me today?<br>
+                                • How is God restoring my soul?
+                            </div>
+                        </div>
+                        <div class="day-section">
+                            <div class="day-section-title">Prayer</div>
+                            <div class="day-section-content">Thank God for one way He provides today</div>
+                        </div>
+                        <div class="day-section">
+                            <div class="day-section-title">Practice</div>
+                            <div class="day-section-content">5m gratitude prayer + 2m stillness</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div>
+                            <span class="day-number">Day 2</span>
+                            <span class="day-scripture">Philippians 4:6-7 (ESV)</span>
+                        </div>
+                        <span class="day-expand-icon">▼</span>
+                    </div>
+                    <div class="day-content"></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div>
+                            <span class="day-number">Day 3</span>
+                            <span class="day-scripture">Mark 1:35 (ESV)</span>
+                        </div>
+                        <span class="day-expand-icon">▼</span>
+                    </div>
+                    <div class="day-content"></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div>
+                            <span class="day-number">Day 4</span>
+                            <span class="day-scripture">Psalm 62:5-8 (ESV)</span>
+                        </div>
+                        <span class="day-expand-icon">▼</span>
+                    </div>
+                    <div class="day-content"></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div>
+                            <span class="day-number">Day 5</span>
+                            <span class="day-scripture">Luke 11:1-4 (ESV)</span>
+                        </div>
+                        <span class="day-expand-icon">▼</span>
+                    </div>
+                    <div class="day-content"></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div>
+                            <span class="day-number">Day 6</span>
+                            <span class="day-scripture">Psalm 139:1-6 (ESV)</span>
+                        </div>
+                        <span class="day-expand-icon">▼</span>
+                    </div>
+                    <div class="day-content"></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <div>
+                            <span class="day-number">Day 7</span>
+                            <span class="day-scripture">Colossians 4:2 (ESV)</span>
+                        </div>
+                        <span class="day-expand-icon">▼</span>
+                    </div>
+                    <div class="day-content"></div>
+                </div>
+            </div>
+            <div class="nav-buttons" style="flex-direction: column; gap: 8px;">
+                <button class="nav-button primary" onclick="goToScreen('signup')">Continue</button>
+                <button class="secondary-button" onclick="showComingSoon()">Customize my habits</button>
+            </div>
+        </div>
+        
+        <!-- 13. Sign Up -->
+        <div class="screen" id="signup">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h1 class="auth-title">Create Your Account</h1>
+                    <p class="auth-subtitle">Let's save your plan and get started</p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" placeholder="••••••••">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Display Name</label>
+                    <input type="text" class="form-input" placeholder="How should we address you?">
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" class="checkbox" checked>
+                    <label>Send me daily reminders</label>
+                </div>
+                <button class="primary-button" onclick="goToScreen('invite')">Create Account & Start Growing</button>
+            </div>
+        </div>
+        
+        <!-- 14. Invite Friend -->
+        <div class="screen" id="invite">
+            <div class="invite-hero">
+                <h1 class="invite-title">Growth Happens Best Together!</h1>
+                <p class="invite-description">Walking with a friend keeps you encouraged and accountable. Who will cheer you on as you grow?</p>
+                <p class="invite-verse">"Two are better than one... if either falls down, one can help the other up." — Ecclesiastes 4:9-10 (ESV)</p>
+            </div>
+            <div class="invite-form">
+                <div class="contact-entry">
+                    <div class="form-group">
+                        <label class="form-label">Friend's Email</label>
+                        <input type="email" class="form-input" placeholder="friend@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone (optional)</label>
+                        <input type="tel" class="form-input" placeholder="+1 555-0123">
+                    </div>
+                </div>
+                <button class="add-contact-btn">+ Add Another Friend</button>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button primary" onclick="goToScreen('today')">Send Invites & Continue</button>
+            </div>
+        </div>
+        
+        <!-- 15. Today (Main App) -->
+        <div class="screen" id="today">
+            <div class="today-header">
+                <div class="greeting">Good morning, Sarah</div>
+                <div class="day-progress">
+                    <div class="progress-ring">
+                        <svg width="48" height="48">
+                            <circle class="progress-ring-bg" cx="24" cy="24" r="21"/>
+                            <circle class="progress-ring-fill" cx="24" cy="24" r="21"/>
+                        </svg>
+                        <div class="progress-text">3/7</div>
+                    </div>
+                    <div class="streak-badge">
+                        <span class="fire">🔥</span>
+                        <span>3 day streak</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-header">
+                    <span class="card-title">Today's Scripture</span>
+                    <span style="color: var(--accent-teal);">ESV</span>
+                </div>
+                <div class="card-body">
+                    <div style="font-size: 20px; font-weight: 600; margin-bottom: 12px;">Matthew 6:25-34</div>
+                    <p style="color: var(--secondary-text);">Tap to read in your Bible app →</p>
+                </div>
+            </div>
+            
+            <div style="padding-bottom: 80px;"></div>
+            
+            <div class="tab-bar">
+                <div class="tab-item active">
+                    <div class="tab-icon">📅</div>
+                    <div class="tab-label">Today</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">👥</div>
+                    <div class="tab-label">Friends</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">📊</div>
+                    <div class="tab-label">Progress</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">👤</div>
+                    <div class="tab-label">Profile</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Screen navigation
+        function goToScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            
+            // Simulate loading for plan generation
+            if (screenId === 'loading') {
+                const messages = [
+                    "Analyzing your spiritual journey...",
+                    "Selecting habits for your growth...",
+                    "Crafting your daily devotions...",
+                    "Almost ready..."
+                ];
+                let i = 0;
+                const interval = setInterval(() => {
+                    i++;
+                    if (i < messages.length) {
+                        document.getElementById('loading-message').textContent = messages[i];
+                    } else {
+                        clearInterval(interval);
+                        setTimeout(() => goToScreen('congrats'), 500);
+                    }
+                }, 1500);
+            }
+        }
+        
+        // Quiz interactions
+        function selectOption(element) {
+            element.parentNode.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+        
+        function updateSliderValue(slider) {
+            document.getElementById('slider-value').textContent = slider.value;
+        }
+        
+        // Habit toggle for Step 5
+        function toggleHabitItem(item) {
+            // Don't toggle if clicking the dropdown
+            if (event.target.tagName === 'SELECT') {
+                event.stopPropagation();
+                return;
+            }
+            
+            // Clear "None yet" if selecting a habit
+            const noneYet = document.querySelector('.habit-item:last-child');
+            if (noneYet && noneYet !== item && noneYet.classList.contains('selected')) {
+                noneYet.classList.remove('selected');
+            }
+            
+            item.classList.toggle('selected');
+        }
+        
+        function toggleNoneYet(item) {
+            // If selecting "None yet", deselect all others
+            document.querySelectorAll('.habit-item').forEach(habit => {
+                if (habit !== item) {
+                    habit.classList.remove('selected');
+                }
+            });
+            item.classList.toggle('selected');
+        }
+        
+        // Growth selection (max 3)
+        let growthCount = 0;
+        function toggleGrowth(card) {
+            if (card.classList.contains('selected')) {
+                card.classList.remove('selected');
+                growthCount--;
+            } else if (growthCount < 3) {
+                card.classList.add('selected');
+                growthCount++;
+            }
+            
+            // Update counter
+            document.querySelector('.selection-counter').textContent = `${growthCount} of 3 selected`;
+            
+            // Disable other cards if 3 selected
+            if (growthCount === 3) {
+                document.querySelectorAll('.growth-card:not(.selected)').forEach(c => {
+                    c.classList.add('disabled');
+                });
+            } else {
+                document.querySelectorAll('.growth-card').forEach(c => {
+                    c.classList.remove('disabled');
+                });
+            }
+        }
+        
+        function selectTime(option) {
+            document.querySelectorAll('.time-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            option.classList.add('selected');
+        }
+        
+        function toggleDay(header) {
+            const card = header.parentElement;
+            card.classList.toggle('expanded');
+        }
+        
+        function updateCharCount(textarea) {
+            const count = textarea.value.length;
+            const counter = textarea.nextElementSibling;
+            counter.textContent = `${count} / 280 characters`;
+            if (count > 280) {
+                textarea.value = textarea.value.substring(0, 280);
+            }
+        }
+        
+        function showComingSoon() {
+            alert('Coming soon! You\'ll be able to customize your habits after launch.');
+        }
+        
+        // Start with welcome screen
+        goToScreen('welcome');
+    </script>
+</body>
+</html>
