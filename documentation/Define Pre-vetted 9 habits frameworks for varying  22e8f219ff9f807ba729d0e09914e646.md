@@ -13,7 +13,7 @@ To use in each OpenAI session
 # Discipler Plan Engine — Metaprompt + 9 Frameworks + Sample Plan
 
 > Fast path: paste the System prompt below into your OpenAI session (or server) and pass the Frameworks JSON + Quiz Input in the same request. The model returns a selection result and a ready-to-import 7/14/30‑day plan.
-> 
+>
 
 ---
 

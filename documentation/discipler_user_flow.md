@@ -15,7 +15,7 @@
 
 ### Route Protection Rules
 
-```
+```text
 (public)/welcome - Always accessible
 (onboarding)/quiz/* - Unauth, progress saved in localStorage
 (onboarding)/plan-preview - Unauth, shows locally generated plan
@@ -25,7 +25,7 @@
 
 ### Screen Hierarchy
 
-```
+```text
 ├── (public)/welcome
 ├── (onboarding)/
 │   ├── quiz/step-1 (Spiritual Journey Baseline)
@@ -495,7 +495,7 @@ POST /plan/generate-local
 
 #### Save Plan (Post Sign-Up)
 
-**Auto-trigger after successful sign-up**
+##### Auto-trigger after successful sign-up
 
 **Process:**
 

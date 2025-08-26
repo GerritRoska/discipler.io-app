@@ -42,6 +42,7 @@ The app is ready for backend integration. Next priorities:
 ### Installation
 
 ```bash
+```bash
 # Install dependencies
 npm install
 

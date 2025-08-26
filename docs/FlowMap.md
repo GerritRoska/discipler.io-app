@@ -2,7 +2,7 @@
 
 ## Canonical User Journey
 
-```
+```text
 ┌─────────────────┐
 │   Welcome       │ ← First launch
 │   Screen        │
@@ -45,12 +45,12 @@
 
 ## Quiz Flow Details
 
-```
+```text
 Step 1: Spiritual Journey
 ├── Options: just_starting, 1_year, 2_5_years, 5_plus_years
 └── Continue → Step 2
 
-Step 2: Relationship Strength  
+Step 2: Relationship Strength
 ├── Slider: 0-100 (default: 50)
 └── Continue → Step 3
 
@@ -83,7 +83,7 @@ Step 8: Hope
 
 ## Main App Navigation
 
-```
+```text
 ┌─────────────────┐
 │   Today         │ ← Primary dashboard
 │   (default)     │
@@ -129,7 +129,7 @@ Step 8: Hope
 
 ## Data Flow
 
-```
+```text
 localStorage (Unauth)
 ├── Quiz answers
 ├── Generated plan
@@ -148,3 +148,4 @@ Supabase (Remote)
 ├── Partner relationships
 └── Notifications
 ```
+

@@ -184,9 +184,9 @@ CREATE TABLE plan_items (
 
 -- Row Level Security
 ALTER TABLE plan_items ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Users can view own plan items" ON plan_items FOR SELECT 
+CREATE POLICY "Users can view own plan items" ON plan_items FOR SELECT
   USING (plan_id IN (SELECT id FROM plans WHERE user_id = auth.uid()));
-CREATE POLICY "Users can insert own plan items" ON plan_items FOR INSERT 
+CREATE POLICY "Users can insert own plan items" ON plan_items FOR INSERT
   WITH CHECK (plan_id IN (SELECT id FROM plans WHERE user_id = auth.uid()));
 ```
 

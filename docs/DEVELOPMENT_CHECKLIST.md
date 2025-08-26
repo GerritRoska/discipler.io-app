@@ -1,200 +1,200 @@
 # Discipler App - Development Checklist
 
-## 🎯 Current Status: Phase 2 Complete - Ready for Phase 3
+## 🎯 Current Status: Apple-Grade UI V2 Complete - Ready for Backend Integration
 
 ### ✅ COMPLETED TASKS
 
-#### Phase 1: Critical Fixes (COMPLETED ✅)
+#### Apple-Grade UI V2 Onboarding Flow (COMPLETED ✅)
+- [x] **Complete 8-Step Flow**: Welcome → Step 1-8 → Plan Preview
+- [x] **VisionOS-Style Design**: Soft glow, layered blur, subtle parallax effects
+- [x] **Design System**: Comprehensive tokens, gradients, and component library
+- [x] **State Management**: Zustand store with AsyncStorage persistence
+- [x] **Analytics Integration**: Complete event tracking throughout flow
+- [x] **Accessibility**: Full compliance with accessibility standards
+- [x] **Haptic Feedback**: Tactile responses for all interactions
 
-- [x] **TypeScript Errors Fixed**: All 14 type errors resolved
-  - [x] Button component interface supports both `title` and `children` props
-  - [x] HabitFrequency type updated with missing values
-  - [x] QuizOption component supports `type` and `disabled` props
-  - [x] FontWeight type issues fixed across all components
-  - [x] ValueSlider component uses correct Slider props
-  - [x] Supabase authentication uses correct magic link method
-  - [x] Step 5 and Step 7 type issues resolved
+#### New Components Created
+- [x] **Surface.tsx**: Glassy card component with glow effects
+- [x] **ProgressHeader.tsx**: Step indicator with progress bar
+- [x] **PrimaryButton.tsx**: Gradient button with haptic feedback
+- [x] **SelectableCard.tsx**: Multi-purpose selection component
+- [x] **ValueSlider.tsx**: Custom slider for numerical input
+- [x] **Chip.tsx**: Small pill component for options
+- [x] **FrequencyChips.tsx**: Habit frequency selection
+- [x] **Toast.tsx**: Top-floating notifications
+- [x] **VerseCard.tsx**: Scripture display component
 
-#### Phase 2: Core Architecture (COMPLETED ✅)
+#### Technical Infrastructure
+- [x] **Design Tokens**: Centralized colors, spacing, duration, radius
+- [x] **Gradient System**: Calm glow gradients for UI elements
+- [x] **Haptic System**: Selection, warning, and success feedback
+- [x] **Analytics System**: Event tracking for user interactions
+- [x] **API Stub**: Client-side placeholder for plan generation
+- [x] **Type Safety**: Complete TypeScript definitions
 
-- [x] **Type System Overhaul**
-  - [x] Created comprehensive typed theme system with proper interfaces
-  - [x] Implemented typed theme constants for colors, fonts, spacing, shadows
-  - [x] Added theme utility functions for consistent styling
-  - [x] Created reusable TypeScript utilities for common patterns
-  - [x] Added proper validation at build time with type checking
+#### Dependencies Added
+- [x] `expo-haptics`: Tactile feedback
+- [x] `@react-native-community/slider`: Custom slider component
+- [x] `react-native-reanimated`: Advanced animations
+- [x] `react-native-gesture-handler`: Gesture handling
+- [x] `expo-blur`: Glassy blur effects
+- [x] `expo-constants`: App constants
 
-- [x] **Component Architecture Refactoring**
-  - [x] Created BaseView component with comprehensive styling props
-  - [x] Created BaseText component with typography presets
-  - [x] Created BaseTouchable component for consistent interactions
-  - [x] Implemented proper prop forwarding and composition patterns
-  - [x] Added TypeScript generics for flexible components
-  - [x] Created composition components (Card, List, Section, Stack, Row)
-  - [x] Added barrel exports for clean imports
-
-- [x] **State Management Improvements**
-  - [x] Created useQuiz custom hook for centralized quiz logic
-  - [x] Implemented proper validation at each step
-  - [x] Added error boundary component for graceful error handling
-  - [x] Created reusable state management patterns
-  - [x] Added proper error recovery and validation utilities
-
-#### Dark Mode UI Implementation
-
-- [x] Update theme colors to dark mode palette
-- [x] Update Tailwind config with dark colors
-- [x] Convert all components to use dark theme
-- [x] Update app config for dark mode splash screen
-
-#### Typography & Font System
-
-- [x] Install and configure Inter font family
-- [x] Add font weights to theme system
-- [x] Create ThemedText component for consistency
-- [x] Update all text components to use Inter font
-- [x] Create global font style helpers
-
-#### Navigation & Button System
-
-- [x] Install expo-linear-gradient package
-- [x] Create gradient primary buttons matching wireframe
-- [x] Build FixedBottomNavigation component
-- [x] Update quiz steps 1-3 with new navigation
-- [x] Add proper back button functionality
-- [x] Implement proper shadows and elevation
-
-#### Component Updates
-
-- [x] Button.tsx - Gradient support and dark theme
-- [x] Card.tsx - Dark theme with enhanced shadows
-- [x] QuizOption.tsx - Selection states with checkmarks
-- [x] QuizHeader.tsx - Enhanced progress bar
-- [x] Input.tsx - Dark theme form styling
-- [x] ProgressBar.tsx - Dark theme indicators
-- [x] Slider.tsx - Enhanced with emoji labels
-
-#### Screen Updates
-
-- [x] Welcome screen - Wireframe-exact layout
-- [x] Quiz steps - Fixed bottom navigation
-- [x] App layouts - Dark theme backgrounds
-- [x] Tab bar - Dark theme with shadows
+#### Files Created/Updated
+- [x] **New Screens**: `app/(onboarding)/welcome.tsx`, `step-1.tsx` through `step-8.tsx`, `app/plan/index.tsx`
+- [x] **New Components**: All UI components in `components/` directory
+- [x] **New Libraries**: `lib/tokens.ts`, `lib/gradients.ts`, `lib/haptics.ts`, `lib/a11y.ts`, `lib/analytics.ts`, `lib/api.ts`
+- [x] **New State**: `state/onboardingStore.ts` with Zustand and AsyncStorage
+- [x] **New Types**: `types/onboarding.ts` with complete type definitions
+- [x] **Updated Config**: `tailwind.config.js`, `package.json`, `app/index.tsx`
 
 ---
 
 ## 🚀 NEXT DEVELOPMENT PHASES
 
-### Phase 3: Quiz Flow Completion (IN PROGRESS 🚧)
+### Phase 1: Backend Integration (CRITICAL NEXT STEP)
+**Goal**: Replace client stub with real backend and database integration
 
-**Goal**: Finish all 8 quiz steps with consistent navigation and styling
+#### Database Schema Creation
+- [ ] **Create profiles table** for user data
+- [ ] **Create plans table** for user plans
+- [ ] **Create plan_items table** for daily tasks
+- [ ] **Set up Row Level Security** (RLS) policies
+- [ ] **Test basic CRUD operations**
 
-#### Quiz Steps 4-8 Updates
+#### API Implementation
+- [ ] **Replace generatePlan stub** with real OpenAI integration
+- [ ] **Implement plan generation** using the 9 habit frameworks
+- [ ] **Add plan persistence** to database
+- [ ] **Handle plan retrieval** from database
+- [ ] **Add error handling** and retry logic
 
-- [ ] **Step 4 (Encouragement)**: Update with FixedBottomNavigation
-- [ ] **Step 5 (Current Habits)**: Update habit selector with dark theme
-- [ ] **Step 6 (Growth Focus)**: Update growth cards with selection states
-- [ ] **Step 7 (Time Commitment)**: Update time options and preferences
-- [ ] **Step 8 (Hope Text)**: Update text area with character counter
+#### Authentication Integration
+- [ ] **Connect onboarding flow** to user accounts
+- [ ] **Implement user profile creation** on first sign-up
+- [ ] **Handle anonymous vs authenticated users**
+- [ ] **Add session management** with Supabase
+- [ ] **Implement proper auth flow** after plan generation
 
-#### HabitSelector Component
+### Phase 2: User Profile Management
+**Goal**: Complete user profile and settings functionality
 
-- [ ] Update HabitSelector.tsx for dark theme
-- [ ] Add proper selection states with checkmarks
-- [ ] Implement frequency dropdowns with dark styling
-- [ ] Add "None yet" exclusive selection logic
+#### Profile Screen
+- [ ] **Create profile screen** with user settings
+- [ ] **Add profile editing** capabilities
+- [ ] **Implement notification preferences**
+- [ ] **Add account management** options
+- [ ] **Connect to existing app data**
 
-#### Plan Preview Enhancements
+#### Data Migration
+- [ ] **Move from AsyncStorage** to Supabase
+- [ ] **Implement data synchronization**
+- [ ] **Add offline support** with sync queue
+- [ ] **Handle data conflicts** gracefully
+- [ ] **Add backup/restore functionality**
 
-- [ ] Update plan preview with expandable day cards
-- [ ] Add proper dark theme styling
-- [ ] Implement day expansion/collapse functionality
-- [ ] Add loading states for plan generation
-
-### Phase 4: Main App Screens (M0.4)
-
+### Phase 3: Main App Screens (M0.4)
 **Goal**: Complete the main authenticated app experience
 
 #### Today Screen
-
-- [ ] Update today screen with dark theme cards
-- [ ] Add proper scripture reading section
-- [ ] Implement expandable O.I.A. sections
-- [ ] Add prayer and habit sections
-- [ ] Create journal entry modal
+- [ ] **Update today screen** with Apple-grade UI
+- [ ] **Add proper scripture reading** section
+- [ ] **Implement expandable O.I.A.** sections
+- [ ] **Add prayer and habit** sections
+- [ ] **Create journal entry modal**
 
 #### Partners Screen
-
-- [ ] Create partner list with empty state
-- [ ] Add invite partner functionality
-- [ ] Design partner activity cards
-- [ ] Implement encouragement actions
+- [ ] **Create partner list** with empty state
+- [ ] **Add invite partner** functionality
+- [ ] **Design partner activity** cards
+- [ ] **Implement encouragement** actions
+- [ ] **Add partner notifications**
 
 #### Progress Screen
-
-- [ ] Add streak counter with fire animation
-- [ ] Create completion statistics
-- [ ] Add progress charts/visualizations
-- [ ] Implement milestone celebrations
+- [ ] **Add streak counter** with fire animation
+- [ ] **Create completion statistics**
+- [ ] **Add progress charts**/visualizations
+- [ ] **Implement milestone** celebrations
+- [ ] **Connect to real data** from database
 
 #### Settings Screen
+- [ ] **Create user profile** section
+- [ ] **Add notification preferences**
+- [ ] **Implement account management**
+- [ ] **Add app information** and support
+- [ ] **Add data export** functionality
 
-- [ ] Create user profile section
-- [ ] Add notification preferences
-- [ ] Implement account management
-- [ ] Add app information and support
-
-### Phase 5: Advanced Features (M0.5)
-
+### Phase 4: Advanced Features (M0.5)
 **Goal**: Polish and enhance user experience
 
 #### Animations & Interactions
-
-- [ ] Add page transition animations
-- [ ] Implement button press animations
-- [ ] Add loading state animations
-- [ ] Create celebration animations
+- [ ] **Add page transition** animations
+- [ ] **Implement button press** animations
+- [ ] **Add loading state** animations
+- [ ] **Create celebration** animations
+- [ ] **Add micro-interactions**
 
 #### Enhanced Components
-
-- [ ] Create reusable modal component
-- [ ] Add toast notification system
-- [ ] Implement pull-to-refresh
-- [ ] Add skeleton loading states
+- [ ] **Create reusable modal** component
+- [ ] **Add toast notification** system
+- [ ] **Implement pull-to-refresh**
+- [ ] **Add skeleton loading** states
+- [ ] **Create error boundary** components
 
 #### Accessibility
+- [ ] **Add proper accessibility** labels
+- [ ] **Implement voice-over** support
+- [ ] **Add high contrast** mode support
+- [ ] **Test with screen readers**
+- [ ] **Add keyboard navigation**
 
-- [ ] Add proper accessibility labels
-- [ ] Implement voice-over support
-- [ ] Add high contrast mode support
-- [ ] Test with screen readers
+### Phase 5: Partner System (M2.0)
+**Goal**: Implement complete partner functionality
 
-### Phase 6: Data & Authentication (M1.0)
+#### Partner Invitation System
+- [ ] **Add contact form** and invitation sending
+- [ ] **Implement email/SMS** invitations
+- [ ] **Add invitation tracking** and status
+- [ ] **Handle invitation acceptance** flow
+- [ ] **Add partner limits** and expiry
 
-**Goal**: Prepare for TestFlight with real data
+#### Partner Activity
+- [ ] **Display partners** from Supabase
+- [ ] **Add real-time updates** with subscriptions
+- [ ] **Implement encouragement** actions
+- [ ] **Add partner notifications**
+- [ ] **Create partner activity** feed
 
-#### Supabase Integration
+#### Accountability Features
+- [ ] **Add partner check-ins**
+- [ ] **Implement streak sharing**
+- [ ] **Add encouragement** messages
+- [ ] **Create accountability** prompts
+- [ ] **Add partner statistics**
 
-- [x] Set up Supabase project
-- [x] Implement email authentication
-- [x] Create authentication store and screens
-- [⚠️] Deep linking configuration (paused - magic link redirect issue)
-- [ ] Create user profile management
-- [ ] Add plan saving functionality
+### Phase 6: Production Readiness (M2.0)
+**Goal**: Prepare for App Store submission
 
-#### Data Persistence
+#### Performance Optimization
+- [ ] **Profile and optimize** app performance
+- [ ] **Achieve 60fps** on target devices
+- [ ] **Optimize bundle size**
+- [ ] **Add performance monitoring**
+- [ ] **Implement lazy loading**
 
-- [ ] Implement offline storage
-- [ ] Add data synchronization
-- [ ] Create backup/restore functionality
-- [ ] Handle network errors gracefully
+#### App Store Preparation
+- [ ] **Create app icons** and splash screen
+- [ ] **Prepare App Store** listing assets
+- [ ] **Add privacy policy** and terms
+- [ ] **Implement analytics** tracking
+- [ ] **Add crash reporting**
 
-#### Push Notifications
-
-- [ ] Set up Expo notifications
-- [ ] Implement daily reminders
-- [ ] Add partner activity notifications
-- [ ] Create notification preferences
+#### Testing & Quality
+- [ ] **Add unit tests** for critical functions
+- [ ] **Implement integration tests**
+- [ ] **Add E2E tests** for user flows
+- [ ] **Perform accessibility** testing
+- [ ] **Add error monitoring**
 
 ---
 
@@ -202,7 +202,7 @@
 
 When working on each task, use this format:
 
-```markdown
+```
 ### [TASK-ID] Task Name
 **Component/Screen**: [Which files to modify]
 **Goal**: [What this accomplishes]
@@ -217,7 +217,7 @@ When working on each task, use this format:
 
 **Testing**:
 - [ ] Component renders correctly
-- [ ] Dark theme styling applied
+- [ ] Apple-grade UI styling applied
 - [ ] Inter font used consistently
 - [ ] Navigation works properly
 - [ ] No console errors
@@ -235,11 +235,32 @@ When working on each task, use this format:
 
 ## 🎯 QUALITY STANDARDS
 
-- **Dark Theme**: All components use dark theme colors
+- **Apple-Grade UI**: All components use the new design system
 - **Inter Font**: All text uses Inter font family
-- **Consistent Spacing**: Follow 4px grid system
+- **Consistent Spacing**: Follow design token spacing system
 - **Proper Shadows**: Use theme shadow colors and elevation
-- [ ] Accessibility: Proper touch targets (44px minimum)
-- [ ] Performance: No unnecessary re-renders
-- [ ] Error Handling: Graceful error states
-- [ ] Testing: Manual testing in Expo Go required
+- **Accessibility**: Proper touch targets (48px minimum)
+- **Performance**: No unnecessary re-renders
+- **Error Handling**: Graceful error states
+- **Testing**: Manual testing in Expo Go required
+
+## 🚨 IMMEDIATE PRIORITIES
+
+### Critical Next Steps (Do First)
+1. **Create Database Tables** - Set up Supabase schema
+2. **Replace API Stub** - Implement real plan generation
+3. **Authentication Integration** - Connect onboarding to user accounts
+
+### High Priority (Do Second)
+1. **User Profile Management** - Complete profile functionality
+2. **Plan Persistence** - Save and retrieve plans from database
+3. **Main App Screens** - Update with Apple-grade UI
+
+### Medium Priority (Do Third)
+1. **Partner System** - Implement invitation and activity
+2. **Advanced Features** - Add animations and polish
+3. **Production Readiness** - Prepare for App Store
+
+---
+
+**Status**: Apple-grade UI V2 onboarding flow complete. Ready to proceed with backend integration and database schema creation.
