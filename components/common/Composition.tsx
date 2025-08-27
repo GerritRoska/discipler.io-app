@@ -29,6 +29,9 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const CardContainer = pressable ? BaseTouchable : BaseView;
   
+  // Filter out props that might conflict with React Native 0.79.5 types
+  const { hitSlop, ...safeProps } = props;
+  
   return (
     <CardContainer
       padding={padding}
@@ -36,7 +39,7 @@ export const Card: React.FC<CardProps> = ({
       borderRadius={borderRadius}
       shadow={shadow}
       onPress={onPress}
-      {...props}
+      {...safeProps}
     >
       {(title || subtitle || headerRight) && (
         <BaseView row center marginBottom="sm">

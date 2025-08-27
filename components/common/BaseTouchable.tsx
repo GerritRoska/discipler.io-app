@@ -53,7 +53,7 @@ export interface BaseTouchableProps extends TouchableOpacityProps {
   // Touch props
   disabled?: boolean;
   activeOpacity?: number;
-  hitSlop?: number | { top?: number; bottom?: number; left?: number; right?: number };
+  hitSlop?: number | { top?: number; bottom?: number; left?: number; right?: number } | undefined;
 }
 
 export const BaseTouchable: React.FC<BaseTouchableProps> = ({
