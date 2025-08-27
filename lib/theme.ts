@@ -100,9 +100,9 @@ const darkColors: ColorPalette = {
   error: '#EF4444',        // Error Red
 };
 
-// Font system
+// Font system - Using system fonts for now
 const fonts: FontSystem = {
-  primary: 'Inter',
+  primary: 'System',
   weights: {
     normal: '400',
     medium: '500',

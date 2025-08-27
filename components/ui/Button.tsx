@@ -81,7 +81,7 @@ export function Button({
 
   const getTextStyle = () => {
     return {
-      fontFamily: 'Inter',
+      fontFamily: theme.fonts.primary,
       fontWeight: '600' as const,
       color: variant === 'primary' ? 'white' : 
              variant === 'secondary' ? theme.colors.textMain : 
