@@ -1,14 +1,14 @@
 # Discipler App
 
-A spiritual growth companion app built with React Native, Expo, and Supabase. Features an Apple-grade UI with visionOS-style design elements, comprehensive onboarding, and personalized spiritual growth plans.
+A spiritual growth companion app built with React Native, Expo, and Supabase. Features a dark mode UI with quiz-based onboarding and personalized spiritual growth plans.
 
 ## 🎯 Current Status
 
 **✅ FULLY OPERATIONAL - SDK 53 Stable**
 
 - **Expo SDK 53** with React 19 and React Native 0.79.5
-- **Apple-Grade UI V2** with visionOS-style design
-- **Complete Onboarding Flow** with 8 steps
+- **Quiz-Based Onboarding** with 8 steps
+- **Dark Mode UI** with consistent styling
 - **Zero TypeScript Errors** and security vulnerabilities
 - **Ready for Backend Integration**
 
@@ -29,11 +29,10 @@ A spiritual growth companion app built with React Native, Expo, and Supabase. Fe
 - **Zustand 4.5.7** for state management
 
 ### UI/UX
-- **Apple-Grade UI V2** with visionOS aesthetics
-- **Design System** with comprehensive tokens
-- **Haptic Feedback** throughout the app
-- **Accessibility** compliant
-- **Dark Mode** theme
+- **Dark Mode Theme** with consistent styling
+- **Quiz-Based Onboarding** with 8 steps
+- **State Persistence** with AsyncStorage
+- **Responsive Design** for all screen sizes
 
 ### Backend (In Progress)
 - **Supabase** for database and authentication
@@ -43,12 +42,11 @@ A spiritual growth companion app built with React Native, Expo, and Supabase. Fe
 ## 📱 Features
 
 ### ✅ Completed
-- **Onboarding Flow**: 8-step guided experience
+- **Quiz Flow**: 8-step guided onboarding experience
 - **Plan Generation**: Personalized spiritual growth plans
-- **Apple-Grade UI**: VisionOS-style design with blur, glow, and depth
+- **Dark Mode UI**: Consistent dark theme throughout
 - **State Management**: Persistent state with AsyncStorage
-- **Analytics**: Event tracking throughout the app
-- **Haptic Feedback**: Tactile responses for interactions
+- **Navigation**: Proper routing and navigation flow
 
 ### 🔄 In Progress
 - **Database Integration**: Supabase schema and API
@@ -74,25 +72,25 @@ A spiritual growth companion app built with React Native, Expo, and Supabase. Fe
 - **Accessibility**: Proper contrast ratios and sizing
 
 ### Components
-- **Surface**: Glassy cards with blur effects
-- **Buttons**: Gradient buttons with haptic feedback
-- **Sliders**: Custom value sliders with labels
-- **Cards**: Selectable cards for options
-- **Progress**: Step indicators and progress bars
+- **Quiz Components**: Step indicators and progress tracking
+- **Form Elements**: Inputs, buttons, and validation
+- **Navigation**: Tab navigation and screen transitions
+- **Cards**: Information display and selection
 
 ## 🏗 Project Structure
 
 ```
 discipler.io-app/
 ├── app/                    # Expo Router screens
-│   ├── (onboarding)/      # Onboarding flow
+│   ├── (public)/          # Public welcome screen
+│   ├── (onboarding)/      # Quiz flow
 │   ├── (app)/            # Main app screens
 │   └── plan/             # Plan preview
 ├── components/            # Reusable UI components
 │   ├── ui/               # Base UI components
+│   ├── quiz/             # Quiz-specific components
 │   └── common/           # Common compositions
 ├── lib/                  # Utilities and configurations
-├── state/                # Zustand stores
 ├── types/                # TypeScript definitions
 └── docs/                 # Documentation
 ```
@@ -140,10 +138,8 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
 ### ✅ Completed Phases
 1. **Dark Mode UI Implementation**
-2. **Apple-Grade UI V2 Implementation**
-3. **Cleanup and Refinement**
-4. **Critical Bug Fixes**
-5. **SDK 53 Upgrade**
+2. **Quiz Flow Implementation**
+3. **SDK 53 Upgrade**
 
 ### 🎯 Current Phase
 **Phase 4: Backend Integration**
@@ -159,10 +155,10 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ## 🧪 Testing
 
 ### Manual Testing
-- Test onboarding flow end-to-end
-- Verify Apple-grade UI components
-- Check haptic feedback on interactions
-- Validate accessibility features
+- Test quiz flow end-to-end
+- Verify dark mode UI components
+- Check navigation and routing
+- Validate state persistence
 
 ### TypeScript
 ```bash
