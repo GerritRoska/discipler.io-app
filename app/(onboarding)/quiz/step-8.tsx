@@ -16,12 +16,12 @@ export default function Step8Screen() {
       setAnswer('hopeText', hopeText.trim());
     }
     setStep(9);
-    router.push('/(onboarding)/plan-preview');
+    router.push('/plan');
   };
 
   const handleSkip = () => {
     setStep(9);
-    router.push('/(onboarding)/plan-preview');
+    router.push('/plan');
   };
 
   return (

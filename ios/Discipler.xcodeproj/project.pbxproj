@@ -144,13 +144,21 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Discipler" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
+<<<<<<< HEAD
 				925C79479EE6469831F2A0DC /* [Expo] Configure project */,
+=======
+				8FA460C317735633762C9B13 /* [Expo] Configure project */,
+>>>>>>> d9a7a91 (feat: enhance app configuration and introduce new UI components)
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
+<<<<<<< HEAD
 				FE7E194A62529F80B0DD7D5E /* [CP] Embed Pods Frameworks */,
+=======
+				7E7CB94F685F10EE69989018 /* [CP] Embed Pods Frameworks */,
+>>>>>>> d9a7a91 (feat: enhance app configuration and introduce new UI components)
 			);
 			buildRules = (
 			);
@@ -243,6 +251,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7E7CB94F685F10EE69989018 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Discipler/Pods-Discipler-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Discipler/Pods-Discipler-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -271,7 +297,11 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Discipler/Pods-Discipler-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+<<<<<<< HEAD
 		925C79479EE6469831F2A0DC /* [Expo] Configure project */ = {
+=======
+		8FA460C317735633762C9B13 /* [Expo] Configure project */ = {
+>>>>>>> d9a7a91 (feat: enhance app configuration and introduce new UI components)
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -290,6 +320,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-Discipler/expo-configure-project.sh\"\n";
 		};
+<<<<<<< HEAD
 		FE7E194A62529F80B0DD7D5E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -308,6 +339,8 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Discipler/Pods-Discipler-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+=======
+>>>>>>> d9a7a91 (feat: enhance app configuration and introduce new UI components)
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */

@@ -31,7 +31,11 @@ export const Card: React.FC<CardProps> = ({
   
   // Filter out props that might conflict with React Native 0.79.5 types
   const { hitSlop, ...safeProps } = props;
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> d9a7a91 (feat: enhance app configuration and introduce new UI components)
   return (
     <CardContainer
       padding={padding}
@@ -39,7 +43,11 @@ export const Card: React.FC<CardProps> = ({
       borderRadius={borderRadius}
       shadow={shadow}
       onPress={onPress}
+<<<<<<< HEAD
       {...safeProps}
+=======
+      {...safeProps} // Use safeProps here
+>>>>>>> d9a7a91 (feat: enhance app configuration and introduce new UI components)
     >
       {(title || subtitle || headerRight) && (
         <BaseView row center marginBottom="sm">

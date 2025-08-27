@@ -14,7 +14,11 @@ const config: ExpoConfig = {
   assetBundlePatterns: ['**/*'],
   ios: {
     supportsTablet: true,
-    bundleIdentifier: 'com.discipler.app'
+    bundleIdentifier: 'com.discipler.app',
+    buildNumber: '1',
+    config: {
+      usesNonExemptEncryption: false
+    }
   },
   android: {
     adaptiveIcon: {

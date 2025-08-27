@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { router } from 'expo-router';
-import { QuizHeader } from '../../../components/quiz/QuizHeader';
-import { QuizOption } from '../../../components/quiz/QuizOption';
-import { FixedBottomNavigation } from '../../../components/ui/FixedBottomNavigation';
+import { ProgressHeader } from '../../../components/ProgressHeader';
+import { SelectableCard } from '../../../components/SelectableCard';
+import { PrimaryButton } from '../../../components/PrimaryButton';
+import { Surface } from '../../../components/Surface';
+import { VerseCard } from '../../../components/VerseCard';
 import { useQuizStore } from '../../../lib/store';
-import { theme } from '../../../lib/theme';
+import { colors, spacing } from '../../../lib/tokens';
+import { analytics } from '../../../lib/analytics';
 
 const SPIRITUAL_JOURNEY_OPTIONS = [
   { value: 'just_starting', label: 'Just starting out' },
@@ -22,6 +25,7 @@ export default function Step1Screen() {
   const handleSelect = (value: string) => {
     setSelected(value);
     setError('');
+    analytics.onboarding.selectOption(1, 'journeyLength', value);
   };
 
   const handleNext = () => {
@@ -32,71 +36,90 @@ export default function Step1Screen() {
 
     setAnswer('spiritualJourney', selected as any);
     setStep(2);
+    analytics.onboarding.stepView(2);
     router.push('/(onboarding)/quiz/step-2');
+  };
+
+  const handleBack = () => {
+    router.back();
   };
 
   return (
     <ScrollView 
       className="flex-1"
-      style={{ backgroundColor: theme.colors.background }}
-      contentContainerStyle={{ padding: 24, paddingBottom: 120 }}
+      style={{ backgroundColor: colors.bg }}
+      contentContainerStyle={{ padding: spacing.xl, paddingBottom: 120 }}
     >
-      <QuizHeader
+      <ProgressHeader
         currentStep={1}
         totalSteps={8}
+        onBack={handleBack}
         title="Where are you on your spiritual journey?"
       />
 
-      <View className="mb-8">
-        <View 
-          className="p-4 rounded-lg mb-6"
-          style={{ 
-            backgroundColor: 'rgba(125, 201, 194, 0.1)',
-            borderLeftWidth: 3,
-            borderLeftColor: theme.colors.accent,
-          }}
-        >
+      <View style={{ marginBottom: spacing.xl }}>
+        <Surface glow>
+          <VerseCard
+            reference="Psalm 32:8"
+            text="I will instruct you and teach you in the way you should go; I will counsel you with my eye upon you."
+          />
           <Text 
-            className="text-sm leading-5"
-            style={{ color: theme.colors.textSecondary }}
+            style={{ 
+              color: colors.textSecondary,
+              fontSize: 14,
+              lineHeight: 20,
+              marginTop: spacing.md,
+              textAlign: 'center',
+            }}
           >
             Every journey matters—God delights in new beginnings!
           </Text>
-          <Text 
-            className="text-xs mt-2 italic"
-            style={{ color: theme.colors.accent }}
-          >
-            Psalm 32:8 (ESV)
-          </Text>
-        </View>
+        </Surface>
 
-        {SPIRITUAL_JOURNEY_OPTIONS.map((option) => (
-          <QuizOption
-            key={option.value}
-            label={option.label}
-            value={option.value}
-            selected={selected === option.value}
-            onSelect={handleSelect}
-          />
-        ))}
+        <View style={{ marginTop: spacing.lg }}>
+          {SPIRITUAL_JOURNEY_OPTIONS.map((option) => (
+            <SelectableCard
+              key={option.value}
+              selected={selected === option.value}
+              onPress={() => handleSelect(option.value)}
+              style={{ marginBottom: spacing.md }}
+            >
+              <Text
+                style={{
+                  color: colors.textPrimary,
+                  fontSize: 16,
+                  fontWeight: '500',
+                }}
+              >
+                {option.label}
+              </Text>
+            </SelectableCard>
+          ))}
+        </View>
 
         {error ? (
           <Text 
-            className="text-sm mt-4 text-center"
-            style={{ color: '#FF6B6B' }}
+            style={{ 
+              color: '#FF6B6B',
+              fontSize: 14,
+              textAlign: 'center',
+              marginTop: spacing.md,
+            }}
           >
             {error}
           </Text>
         ) : null}
       </View>
 
-      <FixedBottomNavigation
-        primaryButton={{
-          title: "Continue",
-          onPress: handleNext,
-          disabled: !selected
-        }}
-      />
+      <View style={{ marginTop: spacing.xl }}>
+        <PrimaryButton
+          title="Continue"
+          onPress={handleNext}
+          disabled={!selected}
+          glow={!!selected}
+          size="lg"
+        />
+      </View>
     </ScrollView>
   );
 }
